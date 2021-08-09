@@ -14,8 +14,8 @@ or location collisions.
 1. Output is logged into the `/var/log` [directory structure][ref004]
 via another named volume. This allows administrators to manage dhcpd
 logging with minimal configuration changes to their existing system.
-1. SELinux customization files are included in the
-[GitHub repository][ref005] to allow this container to run in an
+1. A file called `pnp_dhcpd.cil` is included in the
+1. [GitHub repository][ref005] to allow this container to run in an
 SELinux `enforcing` environment.
 
 This container uses ISC DHCP server which is bundled with the latest Ubuntu
@@ -34,15 +34,18 @@ LTS distribution.
 operating system. This fork was developed on [CentOS 8][ref011] using
 [podman][ref012].
 1.  Create a `dhcpd.conf` file
-[appropriate for your environment][ref021], and place that file in
+[appropriate for your environment][ref012], and place that file in
 `/srv/cnt/dhcpd/dhcpd.conf`.
-1.  As root on the host system, execute `mkdir --parents
-/var/log/cnt-dhcpd/`.
+1.  As root on the host system, execute
+    ```
+    mkdir --parents \
+    /var/log/cnt-dhcpd/`
+    ```
 1.  Clone this repository onto your host system, and `cd` into the
 cloned directory.
 1.  If you're running in a SELinux `enforcing` environment, execute
     ```
-    semodule -i php_dhcpd.cil \
+    semodule -i pnp_dhcpd.cil \
     /usr/share/udica/templates/{base_container.cil,net_container.cil,home_container.cil}
     ```
     See [here][ref013] for more information.
@@ -60,7 +63,7 @@ for your underlying OS.
 > dafydd2277 says: This is straight from `networkboot/docker-dhcpd`.
 I have not tested this with my fork. I suspect you will only need to
 modify the `DHCPD_PROTOCOL` environment variable in `compose.yaml`. If
-that doesn't set you up properly, please create an Issue. Or, better
+that doesn't set you up properly, please create an Issue. Or better
 yet, a Pull Request with whatever modifications you needed to make for
 DHCPv6 to work.
 
@@ -72,10 +75,10 @@ To use a DHCPv6-Server you have to pass `DHCPD_PROTOCOL=6` as enviroment variabl
 ## Notes
 
 - If you want to try merging this work with the LDAP configuration at
-`networkboot\docker-dhcpd`, be my guest. I don't have the resources to
-try it. If you get it work, I'll happily take a pull request
-incorporating whatever modifications or merges you needed to do to
-combine the feature sets.
+`networkboot/docker-dhcpd`, be my guest. I don't have the resources to
+try it. If you get it work, I'll happily take a PR incorporating
+whatever modifications or merges you needed to do to combine the
+feature sets.
 
 - The entrypoint script from `networkboot/docker-dhcpd` has been
 heavily modified to suit the three changes built in to this fork.
@@ -95,7 +98,7 @@ This project is copyright 2021 David Barr <dafydd@dafydd.com>,
 extending work that is copyright 2017-2021 Robin Smidsrød
 <robin@smidsrod.no>.
 
-It is licensed under the Apache 2.0 license.
+It is licensed under the Apache 2.0 license. See the
+[LICENSE file][ref051] for details.
 
-See the file LICENSE for full legal details.
-
+[ref051]: https://github.com/dafydd2277/pnp-dhcpd/blob/main/LICENSE
