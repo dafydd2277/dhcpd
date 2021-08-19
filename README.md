@@ -47,8 +47,7 @@ operating system. This fork was developed on [CentOS 8][ref011] using
     git clone git@github.com:dafydd2277/dhcpd.git
     cd dhcpd
     ```
-1. Copy the rsyslog file from the project directory and restart
-`rsyslog`.
+1. Copy the rsyslog file from the project and restart `rsyslog`.
     ```
     cp -i ./etc/rsyslog.d/10-containers.conf /etc/rsyslog.d/
     systemctl restart rsyslog
@@ -57,6 +56,13 @@ operating system. This fork was developed on [CentOS 8][ref011] using
     called `10-containers.conf` already exists in that directory. If
     that is the case, merge the two files as appropriate for your
     environment.
+1. Copy the logrotate file from the project.
+    ```
+    cp -i ./etc/logrotate.d/containers /etc/logrotate.d/
+    ```
+    The `-i` switch is to force a confirmation question if a file
+    called `containers` already exists in that directory. If that is
+    the case, merge the two files as appropriate for your environment.
 1. Modify `.env` to suit your environment.
 1. Modify `compose.yaml` to suit your environment. Note that you have
 to uncomment the appropriate `ports` entry. If you want to listen to
