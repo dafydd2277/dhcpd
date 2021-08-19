@@ -71,9 +71,9 @@ copies of the second option, modifying the `${s_host_internal_ip}`
 value as appropriate.
 1. [Modify][ref014] `./etc/dhcp/dhcpd.conf` to suit your environment.
     * Pay particular attention to the opportunty to set up an RNDC
-    key to allow you to have `dhcpd` automatically update `bind` to add
-    DNS entries as new hosts join the subnet. Execute these commands to
-    generate the key.
+    key to allow you to have `dhcpd` automatically update `named` to
+    add DNS entries as new hosts join the subnet. Execute these
+    commands to generate the key.
         ```
         cd /tmp
         dnssec-keygen -a hmac-md5 -b 256 -n USER dhcpupdate
