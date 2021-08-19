@@ -1,6 +1,6 @@
 services:
   dhcpd:
-    image: dhcpd
+    image: dafydd277/dhcpd:latest
     environment:
       DHCPD_PROTOCOL: ${i_dhcp_protocol}
     logging:
