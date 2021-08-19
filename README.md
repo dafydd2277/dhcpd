@@ -1,6 +1,6 @@
 # Plug and Play DHCP Container
 
-This a split fork of [networkboot/dhcpd][ref001] at commit
+This a disconnected fork of [networkboot/dhcpd][ref001] at commit
 [2ca8dcf9][ref002]. This fork makes two major modifications and a
 bunch of minor modifications to ease this container's incorporation
 into an Enterprise environment.
