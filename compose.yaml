@@ -1,0 +1,29 @@
+services:
+  dhcpd:
+    image: dhcpd
+    environment:
+      DHCPD_PROTOCOL: ${i_dhcp_protocol}
+    logging:
+      driver: syslog
+      options:
+        tag: cnt-{{.Name}}
+        syslog-address: ${s_syslog_connection_type}://${s_syslog_ip}:${i_syslog_port}
+        syslog-facility: daemon
+    networks:
+      - dhcpd-dns
+    ports:
+#      - 67:67/udp                       # Listen on all interfaces.
+#      - ${s_host_internal_ip}:67:67/udp # Listen on specific interfaces only.
+    volumes:
+      - type: bind
+        source: ${d_dhcpd_config}
+        target: /data
+    working_dir: /data
+
+networks:
+ dhcpd-dns:
+  ipam:
+    driver: default
+    config:
+      - subnet: "172.53.67.0/24"
+
