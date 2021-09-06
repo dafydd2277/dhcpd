@@ -1,6 +1,6 @@
 /var/log/containers/*.log {
    daily
-   maxsixe 1m
+   minsixe 1m
    rotate 4
    dateext
    missingok
