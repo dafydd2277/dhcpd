@@ -47,6 +47,33 @@ operating system. This fork was developed on [CentOS 8][ref011] using
     git clone git@github.com:dafydd2277/dhcpd.git
     cd dhcpd
     ```
+1. Create the group and user, and prevent anyone from logging in as the
+user. IMPORTANT: The GID and UID set here are required in order to
+match the GID and UID used inside the container. Without this match,
+the dhcpd container will not be able to write back to the `source`
+filesystems. Using a different UID or GID will cause the container to
+fail.
+
+    ```bash
+    groupadd \
+      --gid 101 \
+      dhcpd
+    
+    
+    useradd \
+      --comment "User for dhcpd container" \
+      --gid 101 \
+      --home-dir /srv/containers/dhcpd \
+      --no-create-home \
+      --no-user-group \
+      --shell /bin/true \
+      --uid 101 \
+      dhcpd
+    
+    chage -E 0 dhcpd
+    
+    chown -Rv dhcpd:dhcpd /srv/containers/dhcpd
+    ```
 1. Copy the rsyslog file from the project and restart `rsyslog`.
     ```
     cp -i ./etc/rsyslog.d/10-containers.conf /etc/rsyslog.d/
