@@ -91,11 +91,9 @@ fail.
     called `containers` already exists in that directory. If that is
     the case, merge the two files as appropriate for your environment.
 1. Modify `.env` to suit your environment.
-1. Modify `compose.yaml` to suit your environment. Note that you have
-to uncomment the appropriate `ports` entry. If you want to listen to
-more than one interface, but not all interfaces, you can c/p several
-copies of the second option, modifying the `${s_host_internal_ip}`
-value as appropriate.
+1. Modify `compose.yaml` to suit your environment. Note that this
+container must run on the host network (`network_mode: host`) in order
+to receive blind UDP broadcasts from DHCP client hosts.
 1. [Modify][ref014] `./etc/dhcp/dhcpd.conf` to suit your environment.
     * Pay particular attention to the opportunty to set up an RNDC
     key to allow you to have `dhcpd` automatically update `named` to
