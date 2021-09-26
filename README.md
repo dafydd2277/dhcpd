@@ -13,11 +13,18 @@ administrators to manage dhcpd logging with minimal configuration
 changes to their existing system.
 
 This container uses ISC DHCP server which is bundled with the latest Ubuntu
-LTS distribution.
+LTS distribution. The image version tags match those of the underlying Ubuntu
+version, as a reminder that these images will slowly rot, and should be updated
+as the Ubuntu LTS image gets updated.
+
+I also have a compose file for [BIND9][ref104] and a compose file that [combines
+the two services][ref105].
 
 [ref001]: https://hub.docker.com/r/networkboot/dhcpd
 [ref002]: https://github.com/networkboot/docker-dhcpd/commit/2ca8dcf99743808fa3bbc401698bd64d4fb28b07
 [ref003]: https://github.com/dafydd2277/dhcpd
+[ref104]: https://github.com/dafydd2277/bind9
+[ref105]: https://github.com/dafydd2277/dhcpd-bind9
 
 
 ## How to use
@@ -141,9 +148,10 @@ To use a DHCPv6-Server you have to pass `DHCPD_PROTOCOL=6` as enviroment variabl
 try it. If you get it work, I'll happily take a PR incorporating
 whatever modifications or merges you needed to do to combine the
 feature sets.
-
 - The entrypoint script from `networkboot/dhcpd` has been
 heavily modified to suit the changes built in to this fork.
+- TODO: Rebuild the container from the ground up using Alpine instead
+of Ubuntu. This should result in a smaller container.
 
 
 ## Acknowledgements
