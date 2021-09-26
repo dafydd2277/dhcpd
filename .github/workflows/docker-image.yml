@@ -15,5 +15,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag dafydd2277/dhcpd:latest
+      run: docker build . --file Dockerfile --tag dafydd2277/dhcpd:latest --tag dafydd2277/dhcpd:20.04
 
